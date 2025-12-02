@@ -1,0 +1,4 @@
+generate_day
+*.out
+cookies.txt
+.build/
