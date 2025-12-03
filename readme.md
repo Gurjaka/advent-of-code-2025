@@ -32,17 +32,34 @@ Each day resides in its own directory (`dayXX`). The solutions are compiled indi
 
 The solutions are designed to be built using a standard compiler like `gcc` or `clang`.
 
-**Compilation Example:**
+To build **all programs**, simply run:
 
 ```bash
-# From within the day's directory (e.g., day05)
-gcc day05.c -o day05 -Wall -Wextra -std=c99
+make
 ````
 
-**Execution Example:**
+
+**The Makefile includes a special target `generate_day`:**
 
 ```bash
-# Executes the compiled binary, which reads from input.txt
-./day05
+make generate_day
+```
+
+This will:
+
+* Compile `generate_day.c` into `.build/generate_day.o`
+* Link it into the `generate_day` executable
+
+**To remove all build files and executables:**
+
+```bash
+make clean
+```
+
+This will delete:
+
+* `.build/` directory
+* All `day*/main` executables
+* The `generate_day` executable
 
 ---
