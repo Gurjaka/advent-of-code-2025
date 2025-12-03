@@ -19,7 +19,7 @@ Each day resides in its own directory (`dayXX`). The solutions are compiled indi
 ├── day01/
 │   ├── day01.c           # Main solution file (Part 1 and Part 2)
 │   ├── input.txt         # The specific puzzle input for the day
-│   └── puzzle.md         # File containing the puzzle
+│   └── readme.md         # File containing the puzzle
 ├── day02/
 │   └── ...
 ├── include/
