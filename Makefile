@@ -24,7 +24,9 @@ $(BUILD)/%.o: %.c
 
 .PHONY: clean
 clean:
-	$(RM) -r $(BUILD) day*
+	$(RM) -r $(BUILD)
+	$(RM) day*/main
+	$(RM) generate_day
 
 GEN_BUILD := $(BUILD)/generate_day.o
 .PHONY: generate_day
