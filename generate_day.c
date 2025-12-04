@@ -32,54 +32,48 @@ int main(void)
     char session_cookie[LINE_MAX];
     (void)fgets(session_cookie, LINE_MAX, cookies);
 
-    const char *solution_template = {
+    const char *solution_template =
         "#include <stdio.h>\n"
         "#include <stdlib.h>\n"
         "#include <string.h>\n"
+        "#include \"lib.h\"\n"
         "\n"
-        "/**\n"
-        " * @brief Function to solve Part 1.\n"
-        " * @param input_path The path to the puzzle input file.\n"
-        " * @return The calculated result for Part 1.\n"
-        " */\n"
-        "long solve_part1(const char *input_path)\n"
+        "void open_input(const char *input_path, char *content, size_t buf_size)\n"
         "{\n"
-        "    // --- Placeholder Implementation ---\n"
         "    FILE *file = fopen(input_path, \"r\");\n"
         "    if (!file) {\n"
         "        perror(\"Error opening file\");\n"
-        "        return 0;\n"
+        "        exit(EXIT_FAILURE);\n"
         "    }\n"
-        "    // ... Read file and process logic here\n"
+        "\n"
+        "    size_t bytes_read = fread(content, 1, buf_size - 1, file);\n"
+        "    content[bytes_read] = '\\0';\n"
+        "\n"
         "    fclose(file);\n"
-        "    return 0;\n"
         "}\n"
         "\n"
-        "/**\n"
-        " * @brief Function to solve Part 2.\n"
-        " * @param input_path The path to the puzzle input file.\n"
-        " * @return The calculated result for Part 2.\n"
-        " */\n"
-        "long solve_part2(const char *input_path)\n"
+        "long solution(char *content, enum PART part)\n"
         "{\n"
         "    // --- Placeholder Implementation ---\n"
         "    return 0;\n"
         "}\n"
         "\n"
-        "int main(int argc, char *argv[])\n"
+        "int main(void)\n"
         "{\n"
         "    const char *input_file = \"input.txt\";\n"
         "\n"
         "    printf(\"\\n--- Processing Day ---\\n\");\n"
-        "    long result1 = solve_part1(input_file);\n"
-        "    long result2 = solve_part2(input_file);\n"
+        "    char content[30000];\n"
+        "    open_input(input_file, content, sizeof(content));\n"
+        "\n"
+        "    long result1 = solution(content, PART_1);\n"
+        "    long result2 = solution(content, PART_2);\n"
         "\n"
         "    printf(\"Part 1 Result: %ld\\n\", result1);\n"
         "    printf(\"Part 2 Result: %ld\\n\", result2);\n"
         "\n"
         "    return EXIT_SUCCESS;\n"
-        "}\n"
-    };
+        "}\n";
 
 
     DIR *dir = opendir(".");
@@ -189,7 +183,6 @@ int create_day_header(int day_num, const char *filepath)
 int fetch_puzzle_content(int day_num, const char *dir_name, const char *session_cookie)
 {
     char input_cmd[NAME_MAX * 2];
-    char html_cmd[NAME_MAX * 2];
 
     printf("\n--- Fetching Puzzle Content ---\n");
 

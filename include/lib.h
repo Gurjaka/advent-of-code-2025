@@ -6,4 +6,4 @@ enum PART {
     PART_2
 };
 
-#endif /* LIB_H */
+#endif // LIB_H

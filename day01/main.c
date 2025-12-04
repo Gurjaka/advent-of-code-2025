@@ -4,19 +4,18 @@
 
 #include "day01.h"
 
-char *open_input(const char *input_path, char *content, size_t buf_size)
+void open_input(const char *input_path, char *content, size_t buf_size)
 {
     FILE *file = fopen(input_path, "r");
     if (!file) {
         perror("Error opening file");
-        return 0;
+        exit(EXIT_FAILURE);
     }
 
     size_t bytes_read = fread(content, 1, buf_size - 1, file);
     content[bytes_read] = '\0';
 
     fclose(file);
-    return content;
 }
 
 void process_rotation(
@@ -106,7 +105,7 @@ int solve(char *content, enum PART part)
     return password_count;
 }
 
-int main(int argc, char *argv[])
+int main(void)
 {
     const char *input_file = "input.txt";
 

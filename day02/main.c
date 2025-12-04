@@ -6,18 +6,17 @@
 
 #include "lib.h"
 
-char *open_input(const char *input_path, char *content, size_t buf_size)
+void open_input(const char *input_path, char *content, size_t buf_size)
 {
     FILE *file = fopen(input_path, "r");
     if (!file) {
         perror("Error opening file");
-        return 0;
+        exit(EXIT_FAILURE);
     }
 
     fgets(content, buf_size - 1, file);
 
     fclose(file);
-    return content;
 }
 
 bool repeats(const char *buff, int len, int p)
@@ -105,7 +104,7 @@ unsigned long long solution(char *content, enum PART part)
     return total;
 }
 
-int main(int argc, char *argv[])
+int main(void)
 {
     const char *input_file = "input.txt";
 
