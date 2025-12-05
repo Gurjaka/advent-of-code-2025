@@ -14,6 +14,5 @@ void invalid_id(
     enum PART part
 );
 void handle_reset(long long *num, char *buf, int buf_size, int *i);
-long solution(char *content, enum PART part);
 
 #endif // DAY02_H

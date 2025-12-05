@@ -13,6 +13,5 @@ void process_rotation(
     int *password_counter_ptr,
     enum PART part
 );
-int solve(char *content, enum PART part);
 
 #endif // DAY01_H
