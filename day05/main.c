@@ -3,7 +3,10 @@
 #include <string.h>
 #include <stdbool.h>
 
-#include "lib.h"
+enum PART {
+    PART_1,
+    PART_2
+};
 
 void open_input(const char *input_path, char *content, size_t buf_size)
 {
@@ -106,8 +109,10 @@ size_t solution(
                     fresh++;
                     break;
                 }
+
     } else if (part == PART_2) {
         int num_ranges = 0;
+
         while (range_arr[num_ranges][0] != (size_t)-1)
             num_ranges++;
 

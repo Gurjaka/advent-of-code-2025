@@ -4,7 +4,10 @@
 #include <stdbool.h>
 #include <limits.h>
 
-#include "lib.h"
+enum PART {
+    PART_1,
+    PART_2
+};
 
 void open_input(const char *input_path, char *content, size_t buf_size)
 {

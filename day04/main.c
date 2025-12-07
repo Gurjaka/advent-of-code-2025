@@ -3,7 +3,11 @@
 #include <limits.h>
 #include <string.h>
 #include <stdbool.h>
-#include "lib.h"
+
+enum PART {
+    PART_1,
+    PART_2
+};
 
 void open_input(const char *input_path, char (*content)[LINE_MAX])
 {

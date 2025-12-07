@@ -1,8 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
-#include "day01.h"
+#define TRACK_SIZE 100
+
+enum PART {
+    PART_1,
+    PART_2
+};
 
 void open_input(const char *input_path, char *content, size_t buf_size)
 {

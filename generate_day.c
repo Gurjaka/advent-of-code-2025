@@ -15,7 +15,6 @@ typedef struct {
 
 DIR_CONTENT files_fmt(int day)  ;
 int write_template(char *fpath, const char *template);
-int create_day_header(int day_num, const char *filepath);
 int fetch_puzzle_content(int day_num, const char *dir_name, const char *session_cookie);
 int generate_markdown_from_html(const char *html_path, const char *md_path);
 
@@ -36,7 +35,11 @@ int main(void)
         "#include <stdio.h>\n"
         "#include <stdlib.h>\n"
         "#include <string.h>\n"
-        "#include \"lib.h\"\n"
+        "\n"
+        "enum PART {\n"
+        "   PART_1,\n"
+        "   PART_2\n"
+        "};\n"
         "\n"
         "void open_input(const char *input_path, char *content, size_t buf_size)\n"
         "{\n"
@@ -108,11 +111,6 @@ int main(void)
         return EXIT_FAILURE;
     }
 
-    if (create_day_header(day, content.header_path)) {
-        fprintf(stderr, "Failed to create header file at: %s", content.header_path);
-        return EXIT_FAILURE;
-    }
-
     if (fetch_puzzle_content(day, content.dir_name, session_cookie) != 0) {
         fprintf(stderr, "\nSetup failed due to network errors. Cleaning up...\n");
         return EXIT_FAILURE;
@@ -151,32 +149,6 @@ int write_template(char *fpath, const char *template)
 
     fclose(file);
 
-    return 0;
-}
-
-int create_day_header(int day_num, const char *filepath)
-{
-    char guard_macro[16];
-
-    snprintf(guard_macro, sizeof(guard_macro), "DAY%02d_H", day_num);
-
-    FILE *f = fopen(filepath, "w");
-    if (f == NULL) {
-        perror("Error creating header file");
-        return 1;
-    }
-
-    fprintf(f, "#ifndef %s\n", guard_macro);
-    fprintf(f, "    #define %s\n", guard_macro);
-    fprintf(f, "\n");
-    fprintf(f, "// Function prototypes\n");
-    fprintf(f, "long solve_part1(const char *input_path);\n");
-    fprintf(f, "long solve_part2(const char *input_path);\n");
-    fprintf(f, "\n");
-    fprintf(f, "#endif // %s\n", guard_macro);
-
-    fclose(f);
-    printf("Created header: %s\n", filepath);
     return 0;
 }
 

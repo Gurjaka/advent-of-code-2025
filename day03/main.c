@@ -6,7 +6,6 @@
 
 void add_voltage(const char *content, int n, size_t *total)
 {
-    // --- Placeholder Implementation ---
     int len = strlen(content);
     int start = 0;
     char num[20];
