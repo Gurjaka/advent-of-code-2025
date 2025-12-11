@@ -15,6 +15,7 @@
     flake_attributes = forAllSystems (pkgs: rec {
       common-system-deps = with pkgs; [
         compiledb
+        gdb
       ];
 
       pkgs-wrapped = pkgs.lib.lists.flatten [
